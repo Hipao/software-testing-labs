@@ -229,3 +229,28 @@ origin	https://github.com/Hipao/software-testing-labs.git (fetch)
 origin	https://github.com/Hipao/software-testing-labs.git (push)
 
 $ cp "/c/Lessons/RINH/4 курс/Тестирование программного обеспечения/Решения/_исходники/git_bash_log.txt" lab4_git/git_bash_log.txt
+
+$ git add lab4_git/git_bash_log.txt
+
+$ git commit -m "Lab 4: Git Bash session log"
+[main 6c2e7df] Lab 4: Git Bash session log
+ 1 file changed, 231 insertions(+)
+ create mode 100644 lab4_git/git_bash_log.txt
+
+$ git push -u origin main
+To https://github.com/Hipao/software-testing-labs.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+$ git log --oneline
+6c2e7df Lab 4: Git Bash session log
+3232b77 Add project README
+2384cae Lab 5: Selenium WebDriver + TestNG + Allure tests for saucedemo.com (Page Object, 6 scenarios)
+6de9d13 Lab 1: quadratic equation solver with white-box and black-box tests
+
