@@ -66,8 +66,8 @@ def test_input_invalid(text):
         parse_number(text)
 
 
-@pytest.mark.xfail(strict=True, reason="ДЕФЕКТ 2: переполнение b² при |b| > 1e154 даёт корни inf/nan")
+@pytest.mark.xfail(strict=True, reason="ДЕФЕКТ 2: b² и 4ac переполняются, D = inf − inf = nan → ложный ответ «нет действительных корней»")
 def test_overflow():
-    """B18: очень большие коэффициенты — корни должны быть конечными числами."""
+    """B18: очень большие коэффициенты — у уравнения 1e200·(x² + 3x + 2) = 0 корни −2 и −1."""
     _, roots = solve(1e200, 3e200, 2e200)
     assert all(math.isfinite(r) for r in roots) and roots == pytest.approx([-2, -1])
