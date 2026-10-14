@@ -1,0 +1,231 @@
+# === Практическая часть ===
+$ ls /c/git-lab
+tmp
+
+$ cd /c/git-lab/tmp/
+
+$ pwd
+/c/git-lab/tmp
+
+# Настройка автора (только для учебных репозиториев: --local после git init)
+$ ls
+
+$ git init -b master
+Initialized empty Git repository in C:/git-lab/tmp/.git/
+
+$ git config --local user.name "Hipao"
+
+$ git config --local user.email 120205129+Hipao@users.noreply.github.com
+
+$ ls
+
+$ ls -a
+.
+..
+.git
+
+# Перенос папки tmp в GitRepo — репозиторий переезжает вместе с папкой .git
+$ cd /c/git-lab
+
+$ mkdir GitRepo
+
+$ mv tmp GitRepo/
+
+$ cd /c/git-lab/GitRepo/tmp
+
+$ ls -a
+.
+..
+.git
+
+$ git status
+On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+
+# История: Untracked -> Staged -> Unmodified
+$ touch README.txt
+
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	README.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+$ git add README.txt
+
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   README.txt
+
+
+$ git commit -m "Добавлен файл README"
+[master (root-commit) d265e7a] Добавлен файл README
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 README.txt
+
+# Modified -> Staged -> Unmodified
+$ echo 'Hello, world!' > README.txt
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   README.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git add README.txt
+warning: in the working copy of 'README.txt', LF will be replaced by CRLF the next time Git touches it
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   README.txt
+
+
+$ git commit -m "Изменения в README"
+[master 0a1395a] Изменения в README
+ 1 file changed, 1 insertion(+)
+
+$ git log
+commit 0a1395ad4dd5e86070500e77fe8e3c52bc4cb516
+Author: Hipao <120205129+Hipao@users.noreply.github.com>
+Date:   Wed Oct 14 16:54:56 2026 +0300
+
+    Изменения в README
+
+commit d265e7a84f7f92163fc3e71fb6110f8400ae8cda
+Author: Hipao <120205129+Hipao@users.noreply.github.com>
+Date:   Wed Oct 14 16:54:55 2026 +0300
+
+    Добавлен файл README
+
+# Коммит с двумя изменениями
+$ echo TEST > test.txt
+
+$ echo 'Second line' >> README.txt
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   README.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	test.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git add README.txt test.txt
+warning: in the working copy of 'README.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'test.txt', LF will be replaced by CRLF the next time Git touches it
+
+$ git commit -m "Тестовый коммит с 2 изменениями"
+[master 11487d7] Тестовый коммит с 2 изменениями
+ 2 files changed, 2 insertions(+)
+ create mode 100644 test.txt
+
+$ git log --oneline
+11487d7 Тестовый коммит с 2 изменениями
+0a1395a Изменения в README
+d265e7a Добавлен файл README
+
+$ git log -p -1
+commit 11487d73b37641b3d6074f45bc270f5924374fd5
+Author: Hipao <120205129+Hipao@users.noreply.github.com>
+Date:   Wed Oct 14 16:54:56 2026 +0300
+
+    Тестовый коммит с 2 изменениями
+
+diff --git a/README.txt b/README.txt
+index af5626b..3712002 100644
+--- a/README.txt
++++ b/README.txt
+@@ -1 +1,2 @@
+ Hello, world!
++Second line
+diff --git a/test.txt b/test.txt
+new file mode 100644
+index 0000000..2a02d41
+--- /dev/null
++++ b/test.txt
+@@ -0,0 +1 @@
++TEST
+
+# === GitHub: клонирование публичного репозитория GitTest ===
+$ cd /c/git-lab/GitRepo
+
+$ git clone https://github.com/Hipao/GitTest.git test
+Cloning into 'test'...
+
+$ cd test
+
+$ git config --local user.name "Hipao"
+
+$ git config --local user.email 120205129+Hipao@users.noreply.github.com
+
+$ git remote -v
+origin	https://github.com/Hipao/GitTest.git (fetch)
+origin	https://github.com/Hipao/GitTest.git (push)
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+$ echo 'Hello!!!' > Hello.txt
+
+$ git add Hello.txt
+warning: in the working copy of 'Hello.txt', LF will be replaced by CRLF the next time Git touches it
+
+$ git commit -m Hello
+[main a60bd01] Hello
+ 1 file changed, 1 insertion(+)
+ create mode 100644 Hello.txt
+
+$ git push
+To https://github.com/Hipao/GitTest.git
+   0e39bd4..a60bd01  main -> main
+
+$ git log --oneline
+a60bd01 Hello
+0e39bd4 Initial commit
+
+# === Самостоятельная работа: второй репозиторий ===
+# Второй локальный репозиторий — проект лабораторных работ software-testing-labs;
+# на GitHub создаётся второй репозиторий, локальный связывается с ним (remote), делается коммит и push.
+$ cd "/c/Lessons/RINH/4 курс/Тестирование программного обеспечения/Решения/software-testing-labs"
+
+$ git log --oneline
+3232b77 Add project README
+2384cae Lab 5: Selenium WebDriver + TestNG + Allure tests for saucedemo.com (Page Object, 6 scenarios)
+6de9d13 Lab 1: quadratic equation solver with white-box and black-box tests
+
+$ gh repo create software-testing-labs --public --description "Software testing labs: pytest, Selenium WebDriver + TestNG + Allure, Git"
+https://github.com/Hipao/software-testing-labs
+
+$ git remote add origin https://github.com/Hipao/software-testing-labs.git
+
+$ git remote -v
+origin	https://github.com/Hipao/software-testing-labs.git (fetch)
+origin	https://github.com/Hipao/software-testing-labs.git (push)
+
+$ cp "/c/Lessons/RINH/4 курс/Тестирование программного обеспечения/Решения/_исходники/git_bash_log.txt" lab4_git/git_bash_log.txt
