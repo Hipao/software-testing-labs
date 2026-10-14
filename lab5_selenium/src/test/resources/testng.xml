@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- Главный блок TestNG: описывает набор тестов -->
+<suite name="Test Suite">
+
+    <!-- Тесты из методических указаний -->
+    <test name="Login and Price Tests">
+        <classes>
+            <!-- Тест авторизации -->
+            <class name="tests.loggingtest.LoggingTest"/>
+            <!-- Тест подсчёта суммы в корзине -->
+            <class name="tests.pricesumtest.PriceSumTest"/>
+        </classes>
+    </test>
+
+    <!-- Самостоятельные сценарии -->
+    <test name="Additional Scenarios">
+        <classes>
+            <class name="tests.logouttest.LogoutTest"/>
+            <class name="tests.cartitemstest.CartItemsTest"/>
+            <class name="tests.removeitemtest.RemoveItemTest"/>
+            <class name="tests.wrongpasswordtest.WrongPasswordTest"/>
+        </classes>
+    </test>
+</suite>
