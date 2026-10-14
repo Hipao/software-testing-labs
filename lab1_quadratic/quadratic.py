@@ -8,7 +8,10 @@ EPS = 1e-12   # погрешность сравнения вещественны
 def parse_number(text):
     """Преобразует введённую строку в вещественное число. Допускается запятая вместо точки.
     Бесконечность и NaN не являются допустимыми коэффициентами."""
-    value = float(str(text).strip().replace(",", "."))
+    try:
+        value = float(str(text).strip().replace(",", "."))
+    except ValueError:
+        raise ValueError(f"«{text}» не является числом") from None
     if math.isinf(value) or math.isnan(value):
         raise ValueError("коэффициент должен быть конечным числом")
     return value
